@@ -1,0 +1,70 @@
+{
+   "abstract" : "The great new Bundle::Wrapper!",
+   "author" : [
+      "Rui Chen <crotoc@gmail.com>"
+   ],
+   "dynamic_config" : 0,
+   "generated_by" : "Module::Build version 0.4231",
+   "license" : [
+      "artistic_2"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "Bundle-Wrapper",
+   "prereqs" : {
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.4004"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Data::Dumper" : "0",
+            "File::Path" : "0",
+            "IPC::Cmd" : "0",
+            "IPC::Run" : "0",
+            "MCE::Hobo" : "0",
+            "MCE::Map" : "0",
+            "MCE::Shared" : "0",
+            "MyBase::Mysub" : "0",
+            "String::Random" : "0"
+         }
+      },
+      "test" : {
+         "requires" : {
+            "Test::More" : "0"
+         }
+      }
+   },
+   "provides" : {
+      "Bundle::File" : {
+         "file" : "lib/Bundle/File.pm"
+      },
+      "Bundle::MCEMap" : {
+         "file" : "lib/Bundle/MCEMap.pm"
+      },
+      "Bundle::Methods" : {
+         "file" : "lib/Bundle/Methods.pm"
+      },
+      "Bundle::Multifork" : {
+         "file" : "lib/Bundle/Multifork.pm"
+      },
+      "Bundle::Test" : {
+         "file" : "lib/Bundle/Test.pm"
+      },
+      "Bundle::Wrapper" : {
+         "file" : "lib/Bundle/Wrapper.pm",
+         "version" : "0.01"
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://www.perlfoundation.org/artistic_license_2_0"
+      ]
+   },
+   "version" : "0.01",
+   "x_serialization_backend" : "JSON::PP version 2.27400_02"
+}

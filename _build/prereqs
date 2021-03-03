@@ -1,0 +1,20 @@
+do{ my $x = {
+       'build_requires' => {},
+       'conflicts' => {},
+       'recommends' => {},
+       'requires' => {
+                       'Data::Dumper' => '0',
+                       'File::Path' => '0',
+                       'IPC::Cmd' => '0',
+                       'IPC::Run' => '0',
+                       'MCE::Hobo' => '0',
+                       'MCE::Map' => '0',
+                       'MCE::Shared' => '0',
+                       'MyBase::Mysub' => '0',
+                       'String::Random' => '0'
+                     },
+       'test_requires' => {
+                            'Test::More' => '0'
+                          }
+     };
+$x; }
