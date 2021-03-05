@@ -5,9 +5,7 @@ do{ my $x = [
        {},
        {
          'PL_files' => undef,
-         '_added_to_INC' => [
-                              '/fs0/chenr6/chenr6/myscript/module'
-                            ],
+         '_added_to_INC' => [],
          'allow_mb_mismatch' => 0,
          'allow_pureperl' => 0,
          'auto_configure_requires' => 1,

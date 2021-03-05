@@ -38,6 +38,6 @@ requires:
   MyBase::Mysub: '0'
   String::Random: '0'
 resources:
-  license: http://www.perlfoundation.org/artistic_license_2_0
+  license: http://opensource.org/licenses/artistic-license-2.0.php
 version: '0.01'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'

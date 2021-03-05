@@ -11,7 +11,7 @@ sub magic_number_matches {
   open $FH, '<','_build/magicnum' or return 0;
   my $filenum = <$FH>;
   close $FH;
-  return $filenum == 604786;
+  return $filenum == 67690;
 }
 
 my $progname;
@@ -31,7 +31,7 @@ BEGIN {
   }
   unshift @INC,
     (
-     '/fs0/chenr6/chenr6/myscript/module'
+
     );
     if ($INC[-1] ne '.') {
         push @INC, '.';

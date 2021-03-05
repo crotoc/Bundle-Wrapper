@@ -199,6 +199,7 @@ sub date{
     my @abbr = qw(Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec);
     my @abbr_num = qw(01 02 03 04 05 06 07 08 09 10 11 12);
     $year += 1900;
+    $mon  += 1;
     my @out;
     push @out,(sprintf("%s%02d%02d",$year,$mon,$mday),sprintf("%02d%02d%02d",$hour,$min,$sec));
     return join "-",@out;
