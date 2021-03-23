@@ -85,15 +85,6 @@ sub cmd_go{
     $hash->{success}=$?;
     $hash->{cmd}=$cmd;
 
-    #print Dumper $self;
-    if(${$self->opt}{log}){
-	my $fh_log=$self->log_fh();
-	#print Dumper $fh_log;
-	print {$fh_log->{cmd}} $cmd."\n";
-	print {$fh_log->{out}} "CMD:$hash->{cmd}\nOUT:$hash->{stdout}\n";
-	print {$fh_log->{err}} "CMD:$hash->{cmd}\nERR:$hash->{stderr}\n";        
-    }
-
     if($hash->{success}){$self->clean_err_output;if(!$ignore){die "not sucessfull: $hash->{stderr}\n";}else{warn("not sucessfull: $hash->{stderr}\n")}}
     my $end_time = time;
     printf $fh "TIME: Ends at %s (elapsed: %s)\n",
@@ -148,8 +139,18 @@ sub system_bash {
 
 sub run{
     my($self,$cmd)=@_;
+    my $fh_log=$self->log_fh();
+    print {$fh_log->{cmd}} $cmd."\n";
+
     $self->isrun? my $out=$self->cmd_go($cmd):print "SKIP: $cmd\n";
+
+    #print Dumper $self;
+    if($out){
+	print {$fh_log->{out}} "CMD:$out->{cmd}\nOUT:$out->{stdout}\n";
+	print {$fh_log->{err}} "CMD:$out->{cmd}\nERR:$out->{stderr}\n";        
+    }
     $out
+
 }
 
 sub log_last{

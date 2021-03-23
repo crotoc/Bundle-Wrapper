@@ -20,8 +20,8 @@ sub check{
     my $self = shift;
     my @file = @_;
     foreach (@file){
-	if ($_){ print "TEST: check $_ ok\n"; $self->{_check}->{$_}=1;}
-	else {print "TEST: require $_ not ok\n";$self->{_check}->{$_}=0;$self->throw("variable null\n")}
+	if ($_){ print "TEST: check $_ OK\n"; $self->{_check}->{$_}=1;}
+	else {print "TEST: require $_ NOT OK\n";$self->{_check}->{$_}=0;$self->throw("variable null\n")}
     }
 }
 
@@ -29,7 +29,7 @@ sub checkBin{
     my ($self,@cmd)=@_;
     foreach (@cmd){
 	if(! can_run($_)){
-	    $self->throw("$_ does not exist in your PATH")
+	    $self->throw("$_ does NOT exist in your PATH")
 	}
     }
 }
@@ -44,20 +44,20 @@ sub input{
 	$i++;
 	if (-e($file)){
 	    if($i<=5)
-	    {print "TEST: input $file ok\n";}
+	    {print "TEST: input $file OK\n";}
 	    $n++;
 	    $self->{_input}->{$file}=1;
 	}
 	else {
 	    if($i<=5){
-		print "TEST: input $file not ok\n";
+		print "TEST: input $file NOT OK\n";
 	    }
 	    $self->{_input}->{$file}=0;$self->throw("file $file absent\n")
 	}
     }
 
     if(@file>5){
-	print "TEST: input many! $n/".scalar(@file)." are ok\n";
+	print "TEST: input many! $n/".scalar(@file)." are OK\n";
     }
 
 }
@@ -72,19 +72,19 @@ sub output{
 	$i++;
 	if (-e $_){
 	    if($i<=5)
-	    {print "TEST: output $_ ok\n";}
+	    {print "TEST: output $_ OK\n";}
 	    $n++;
 	    $self->{_output}->{$_}=1;
 	}
 	else {
 	    if($i<=5){
-		print "TEST: output $_ not ok\n";
+		print "TEST: output $_ NOT OK\n";
 	    }
 	    $self->{_output}->{$_}=0;}
     }
     #print Dumper $self->{_output};
     if(@file>5){
-	print "TEST: output many! $n/".scalar(@file)." are ok\n";
+	print "TEST: output many! $n/".scalar(@file)." are OK\n";
     }
     
     my $flag=1;
