@@ -22,7 +22,7 @@ sub cmd_MCEMap{
     };
     
     #print Dumper($cmd);
-    $fh=*STDOUT, if !$fh;
+    $fh=*STDERR, if !$fh;
     my $start_time = time;
     print $fh "CMD: ".scalar(@$cmd)." cmd to be run\n";
     if(@$cmd<5){
@@ -55,7 +55,7 @@ sub run_MCEMap{
     }
 
     
-    $self->isrun? my $out=$self->cmd_MCEMap($cmd):print "$skipstr\n";
+    $self->isrun? my $out=$self->cmd_MCEMap($cmd):print STDERR "$skipstr\n";
 
     #print Dumper($out);
     if($out){
@@ -64,7 +64,7 @@ sub run_MCEMap{
     	    print {$fh_log->{err}} "CMD:$_->{cmd}\nERR:$_->{stderr}\n";
     	}
     }
-    
+    $out;
 }
 
 
