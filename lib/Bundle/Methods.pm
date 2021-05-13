@@ -33,8 +33,8 @@ sub test_file{
     my @file = @_;
     my $flag;
     foreach (@file){
-	if (-e $_){ print "TEST: $_ existed\n"; $flag=1;}
-	else {print "TEST: $_ not existed\n";return 0;}
+	if (-e $_){ print STDERR "TEST: $_ existed\n"; $flag=1;}
+	else {print STDERR "TEST: $_ not existed\n";return 0;}
     }
     return $flag;
 }
@@ -44,8 +44,8 @@ sub test_rlt_file{
     my @file = @_;
     my $flag;
     foreach (@file){
-	if (-e $_){ print "TEST: $_ existed\n"; $flag=1;}
-	else {print "TEST: $_ not existed\n";return 0;}
+	if (-e $_){ print STDERR "TEST: $_ existed\n"; $flag=1;}
+	else {print STDERR "TEST: $_ not existed\n";return 0;}
     }
     return $flag;
 }
@@ -77,7 +77,7 @@ sub time_elapse_string
 
 sub cmd_go{
     my ($self,$cmd,$fh,$ignore) =@_;
-    $fh=*STDOUT, if !$fh;
+    $fh=*STDERR, if !$fh;
     print $fh "CMD: $cmd\n";
     my $start_time = time;
     print $fh "TIME: Starts at " . time_string($start_time) . "\n";
@@ -120,7 +120,7 @@ sub clean_err_output{
 
 sub step_print{
     my ($self,$str)= @_;
-    print "\nSTEP: $str\n";
+    print STDERR "\nSTEP: $str\n";
 }
 
 sub system_bash {
@@ -142,7 +142,7 @@ sub run{
     my $fh_log=$self->log_fh();
     print {$fh_log->{cmd}} $cmd."\n";
 
-    $self->isrun? my $out=$self->cmd_go($cmd):print "SKIP: $cmd\n";
+    $self->isrun? my $out=$self->cmd_go($cmd):print STDERR "SKIP: $cmd\n";
 
     #print Dumper $self;
     if($out){
@@ -216,7 +216,7 @@ sub mkdir{
 	    $self->cmd_go_nolog("$cmd",*STDOUT,1);
 	}
 	else{
-	    if(-d $_){ print "SKIP: $cmd\n";}
+	    if(-d $_){ print STDERR "SKIP: $cmd\n";}
 	    else{$self->throw("existed a file name called $_");}
 	}
     }
@@ -230,7 +230,7 @@ sub mkpath{
 	    $self->make_path($_);
 	}
 	else{
-	    if(-d $_){ print "SKIP: mkdir $_\n";}
+	    if(-d $_){ print STDERR "SKIP: mkdir $_\n";}
 	    else{$self->throw("existed a file name called $_");}
 	}
     }
