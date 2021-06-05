@@ -19,7 +19,7 @@ sub new {
 sub cmd_multifork{
     my ($self,$cmd,$fh) =@_;
     
-    $fh=*STDOUT, if !$fh;
+    $fh=*STDERR, if !$fh;
     my $start_time = time;
     print $fh "CMD: ".scalar(@$cmd)." cmd to be run\n";
     if(@$cmd<5){
