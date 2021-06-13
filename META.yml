@@ -26,7 +26,7 @@ provides:
     file: lib/Bundle/Test.pm
   Bundle::Wrapper:
     file: lib/Bundle/Wrapper.pm
-    version: '0.01'
+    version: '0.02'
 requires:
   Data::Dumper: '0'
   File::Path: '0'
@@ -39,5 +39,5 @@ requires:
   String::Random: '0'
 resources:
   license: http://opensource.org/licenses/artistic-license-2.0.php
-version: '0.01'
+version: '0.02'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'
