@@ -213,7 +213,7 @@ sub mkdir{
     foreach(@dir){
 	my $cmd = "mkdir -p $_";
 	if(! -e $_ ){
-	    $self->cmd_go_nolog("$cmd",*STDOUT,1);
+	    $self->cmd_go_nolog("$cmd",*STDERR,1);
 	}
 	else{
 	    if(-d $_){ print STDERR "SKIP: $cmd\n";}

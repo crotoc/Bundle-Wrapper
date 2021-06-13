@@ -171,12 +171,12 @@ sub log_fh{
     $self->system_bash("mkdir -p ${$self->opt}{dir_log_cmd}");
     my @caller=caller(2);
     my $fh;
-    $caller[3]=~s/.*://g;
+    $caller[2]=~s/.*://g;
 
     ## print Dumper ${$self->opt}{dir_log_cmd}."/".$caller[3].".cmd";
-    open $fh->{cmd},">>",${$self->opt}{dir_log_cmd}."/".$caller[3].".cmd" or die "Can't open \$fh->{cmd}";
-    open $fh->{out},">>",${$self->opt}{dir_log_cmd}."/".$caller[3].".out";
-    open $fh->{err},">>",${$self->opt}{dir_log_cmd}."/".$caller[3].".err";
+    open $fh->{cmd},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".cmd" or die "Can't open \$fh->{cmd}";
+    open $fh->{out},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".out";
+    open $fh->{err},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".err";
     return ($fh);
 }
 

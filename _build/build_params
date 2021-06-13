@@ -52,7 +52,7 @@ do{ my $x = [
                           ],
          'dist_name' => 'Bundle-Wrapper',
          'dist_suffix' => undef,
-         'dist_version' => '0.01',
+         'dist_version' => '0.02',
          'dist_version_from' => 'lib/Bundle/Wrapper.pm',
          'dynamic_config' => 1,
          'extra_compiler_flags' => [],

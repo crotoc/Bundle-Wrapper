@@ -56,7 +56,7 @@
       },
       "Bundle::Wrapper" : {
          "file" : "lib/Bundle/Wrapper.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       }
    },
    "release_status" : "stable",
