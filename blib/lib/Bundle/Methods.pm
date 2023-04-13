@@ -4,7 +4,6 @@ use warnings;
 use parent qw(MyBase::Bio::Root::Root);
 use Data::Dumper;
 use IPC::Run;
-use MyBase::Mysub;
 use String::Random;
 use B qw( svref_2object );
 use File::Path qw(make_path remove_tree);
@@ -19,6 +18,34 @@ sub new {
     return $self;
 }
 
+sub setMethod{
+    my ($self,%args)=@_;
+    my @keys=keys %args;
+    ##print Dumper %args;
+    $self->_set_from_args(\%args,
+     			  -methods => \@keys,
+     			  -create => 1
+     	); 
+}
+
+
+sub opt_print{
+    my ($self,$hash,$fh,$fmt_hash)= @_;
+    $fh=*STDOUT,if !$fh;
+    if(!$fmt_hash){
+	$fmt_hash->{a} = 10 if !defined $fmt_hash->{a};
+	$fmt_hash->{b} = 15 if !defined $fmt_hash->{b};
+	$fmt_hash->{c} = 5  if !defined $fmt_hash->{c};
+	$fmt_hash->{d} = 40 if !defined $fmt_hash->{d};
+    }
+    foreach my $key (sort keys %$hash) {
+	if(ref $hash->{$key} eq 'ARRAY'){$hash->{$key}=join ",",@{$hash->{$key}}}
+	print $fh " " x $fmt_hash->{a};
+	if(!defined $hash->{$key}){$hash->{$key}=""}
+	printf $fh "%-$fmt_hash->{b}s %s %-$fmt_hash->{d}s\n", "-$key", " " x $fmt_hash->{c},$hash->{$key};
+    }
+
+}
 
 sub time_string
 {
@@ -171,12 +198,12 @@ sub log_fh{
     $self->system_bash("mkdir -p ${$self->opt}{dir_log_cmd}");
     my @caller=caller(2);
     my $fh;
-    $caller[3]=~s/.*://g;
+    $caller[2]=~s/.*://g;
 
     ## print Dumper ${$self->opt}{dir_log_cmd}."/".$caller[3].".cmd";
-    open $fh->{cmd},">>",${$self->opt}{dir_log_cmd}."/".$caller[3].".cmd" or die "Can't open \$fh->{cmd}";
-    open $fh->{out},">>",${$self->opt}{dir_log_cmd}."/".$caller[3].".out";
-    open $fh->{err},">>",${$self->opt}{dir_log_cmd}."/".$caller[3].".err";
+    open $fh->{cmd},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".cmd" or die "Can't open \$fh->{cmd}";
+    open $fh->{out},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".out";
+    open $fh->{err},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".err";
     return ($fh);
 }
 
@@ -234,6 +261,12 @@ sub mkpath{
 	    else{$self->throw("existed a file name called $_");}
 	}
     }
+}
+
+
+sub get{
+    my ($self,$str)=@_;
+    return $self->{"_$str"};
 }
 
 
@@ -304,6 +337,247 @@ sub clean{
 	    $self->cmd_go($cmd);
 	}
     }
+}
+
+
+sub sendmail()
+{
+    my ($class,$command_line,$email) = @_;
+    
+    
+    if ($email)
+    {
+	my $from="vmpsched\@vmpsched.vampire";
+	my $to="$email";
+	my $subject="An error";
+
+	my $sendmailpath="/usr/sbin/sendmail";
+
+	my $message = "An error has occurred processing your job, see below.\n$command_line\n\nfrom cgg lab\n";
+
+	open (SENDMAIL, "| $sendmailpath -t") or die "Cannot open $sendmailpath: $!";
+
+	print SENDMAIL "Subject: $subject\n";
+	print SENDMAIL "From: $from\n";
+	print SENDMAIL "To: $to\n\n";
+
+	print SENDMAIL "$message";
+
+	close (SENDMAIL);
+    }
+}
+
+
+####################################################################
+##                   Format Output function
+####################################################################
+sub getStrByKeysHash
+{
+    my ($self,$keys) = @_;
+    print Dumper $keys;
+    my @str;
+    map {exists $self->{"$_"}?push @str,$self->{"$_"}:push @str,"";}  @$keys;
+    return join ";",@str;
+}
+
+sub getStrByKeysSepHash
+{
+    my ($self,$keys,$sep) = @_;
+    $sep=";",if !$sep;
+    my @str;
+    map {exists $self->{"$_"}?push @str,$self->{"$_"}:push @str,"";}  @$keys;
+    #print Dumper(scalar(@str));
+    return join $sep,@str;
+}
+
+
+sub getArrayByKeysHash
+{
+    my ($self,$keys) = @_;
+    my @str;
+    map {exists $self->{"$_"}?push @str,$self->{"$_"}:push @str,"";} @$keys;
+    return \@str;
+}
+
+sub getTabByKeysHash
+{
+    my ($self,$keys) = @_;
+    my @str;
+    map {push @str,$self->{"$_"}} @$keys;
+    return join "\t",@str;
+}
+
+
+####################################################################
+##                             Other
+####################################################################
+sub prompt{
+    my ($self,$mode)=@_;
+    if($mode eq "yesorno"){
+	while(my $prompt=<STDIN>){
+	    chomp($prompt);
+	    if(!$prompt){return 1;}
+	    elsif($prompt=~/y/ && $prompt!~/n/){
+		return 1;
+	    }
+	    else{return 0;}
+	}
+    }
+    elsif($mode eq "reply"){
+	while(my $prompt=<STDIN>){
+	    chomp($prompt);
+	    if(!$prompt){next;}
+	    else{return $prompt;}
+	}
+    }
+    else{
+	exit("wrong mode for subroutine promp\n");
+    }
+
+}
+
+
+sub prompt_option{
+    my ($self,$x) = @_;
+    my $min = min($#$x,15);
+    map {print STDERR $_+1,"\t",$$x[$_],"\n"} 0..$min;
+    print STDERR "输入:\t";
+    while( my $i = &prompt("reply")){
+	if(looks_like_number($i) && $i <=@$x){
+	    my ($key,$value) = split/\s*\t\s*/,$$x[$i-1];
+	    print STDERR "你选中的是:\t$key\n";
+	    return $key;
+	}
+	elsif(!looks_like_number($i)){
+	    print STDERR "new entry\n";
+	    return $i;
+	}
+	elsif($i > @$x){
+	    print STDERR "input number too big\n";
+	    next;
+	}
+    }
+}
+
+sub counting{
+    my ($self,$file) = @_;
+    print "\nSUBSTEP: Counting\n";
+    if($self->test_file($file)){
+	my $cmd="wc -l $file";
+	$self->cmd_go($cmd);
+    }
+    else{ $self->throw("No such file;")}
+    print "done\n\n";
+} 
+
+sub colstr2array
+{
+    my ($class,$str) = @_;
+    my @array;
+    if($str!~/,|-/){
+	push @array,$str
+    }
+    elsif($str=~/-/ && $str!~/,/){
+	@array = $class->scale2array($str);
+    }
+    elsif($str=~/,/ && $str!~/-/){
+	@array = split/,/,$str;
+    }
+    else
+    {
+	my @tmp = split/,/,$str;
+	for(@tmp){
+	    if(/-/){
+		push @array,$class->scale2array($_);
+	    }
+	    else
+	    {
+		push @array,$_;
+	    }
+	}	
+    }
+    return @array;
+}
+
+sub grouphash{
+    #Input group or map file, return group-wise Hashes
+    my $class = shift;
+    my @q = @{$_[0]};
+    my $format = $_[1];
+    my $col = $_[2];
+    my %a;
+    my %b;
+    #print @q;
+
+    foreach my $query(@q){
+        my $group;
+        my $chr;
+        my $pos;
+        my $freq;
+        
+	if($query!~/#/){
+	    if($format eq "map"){
+		($group,$chr,$pos,$freq) = split/[\t:]/, $query;
+		$a{"$chr\t$group"}++;
+		#print "$query\t".$a{"$chr\t$group"},"\n";
+		if($a{"$chr\t$group"}>=1){
+		    push @{$b{"$chr\t$group"}},$query."\n";
+		}
+	    }
+	    elsif($format eq "group"){
+		($chr,$pos,$group) = split/\t/, $query;
+		$a{"$chr\t$group"}++;
+		#print "$query\t".$a{"$chr\t$group"},"\n";
+		if($a{"$chr\t$group"}>=1){
+		    push @{$b{"$chr\t$group"}},$query."\n";
+		}
+	    }
+	    elsif($format eq "bycol"){
+		my @temp = split/\t/,$query;
+		$group = $temp[$col-1];
+		$a{"$group"}++;
+		#print "$query\t".$a{"$chr\t$group"},"\n";
+		if($a{"$group"}>=1){
+		    push @{$b{"$group"}},$query."\n";
+		}
+	    }
+	    else{
+		die "Please input right format";
+	    }
+	    
+	}
+    }
+    return %b;
+}
+
+
+sub colstr2array
+{
+    my ($class,$str) = @_;
+    my @array;
+    if($str!~/,|-/){
+	push @array,$str
+    }
+    elsif($str=~/-/ && $str!~/,/){
+	@array = $class->scale2array($str);
+    }
+    elsif($str=~/,/ && $str!~/-/){
+	@array = split/,/,$str;
+    }
+    else
+    {
+	my @tmp = split/,/,$str;
+	for(@tmp){
+	    if(/-/){
+		push @array,$class->scale2array($_);
+	    }
+	    else
+	    {
+		push @array,$_;
+	    }
+	}	
+    }
+    return @array;
 }
 
 

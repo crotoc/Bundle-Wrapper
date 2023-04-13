@@ -17,17 +17,15 @@ my $builder = Module::Build->new(
         'Test::More' => '0',
     },
     requires => {
-        'MyBase::Mysub' => '0',
-            'Data::Dumper' => '0',
+	'Data::Dumper' => '0',
             'File::Path' => '0',
             'IPC::Cmd' => '0',
             'IPC::Run' => '0',
             'MCE::Hobo' => '0',
 	    'MCE::Map' => '0',
 	    'MCE::Shared' => '0',
-            'MyBase::Mysub' => '0',
-            'String::Random' => '0'
-		
+	    'String::Random' => '0'
+	    
     },
     add_to_cleanup     => [ 'Bundle-Wrapper-*' ],
 );

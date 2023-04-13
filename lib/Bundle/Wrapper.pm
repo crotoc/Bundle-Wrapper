@@ -1,7 +1,7 @@
 package Bundle::Wrapper;
 use strict;
 use warnings;
-use parent qw(MyBase::Bio::Root::Root);
+use parent qw(Bundle::Bio::Root::Root);
 use Data::Dumper;
 use parent qw(Bundle::Test);
 use parent qw(Bundle::Multifork);
@@ -14,11 +14,17 @@ Bundle::Wrapper - The great new Bundle::Wrapper!
 
 =head1 VERSION
 
-Version 0.02
+Version 0.03
+
+Update: 
+
+1. Absorb Bundle::Mysub
+2. Add Bio dependence
+
 
 =cut
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 
 =head1 SYNOPSIS

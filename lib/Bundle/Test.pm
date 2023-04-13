@@ -2,10 +2,9 @@ package Bundle::Test;
 use strict;
 #use threads;
 use warnings;
-use base qw(MyBase::Bio::Root::Root);
+use base qw(Bundle::Bio::Root::Root);
 use Data::Dumper;
 use base qw(Bundle::Methods);
-use base qw(MyBase::Mysub);
 use IPC::Cmd qw/can_run/;
 
 sub new {

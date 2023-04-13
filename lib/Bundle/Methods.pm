@@ -1,7 +1,7 @@
 package Bundle::Methods;
 use strict;
 use warnings;
-use parent qw(MyBase::Bio::Root::Root);
+use parent qw(Bundle::Bio::Root::Root);
 use Data::Dumper;
 use IPC::Run;
 use String::Random;
@@ -550,35 +550,6 @@ sub grouphash{
     return %b;
 }
 
-
-sub colstr2array
-{
-    my ($class,$str) = @_;
-    my @array;
-    if($str!~/,|-/){
-	push @array,$str
-    }
-    elsif($str=~/-/ && $str!~/,/){
-	@array = $class->scale2array($str);
-    }
-    elsif($str=~/,/ && $str!~/-/){
-	@array = split/,/,$str;
-    }
-    else
-    {
-	my @tmp = split/,/,$str;
-	for(@tmp){
-	    if(/-/){
-		push @array,$class->scale2array($_);
-	    }
-	    else
-	    {
-		push @array,$_;
-	    }
-	}	
-    }
-    return @array;
-}
 
 
 1;

@@ -1,7 +1,7 @@
 package Bundle::MCEMap;
 use strict;
 use warnings;
-use parent qw(MyBase::Bio::Root::Root);
+use parent qw(Bundle::Bio::Root::Root);
 use parent qw(Bundle::Methods);
 use Data::Dumper;
 use MCE::Shared;

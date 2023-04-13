@@ -1,7 +1,7 @@
-package ::;
+package Bundle::ObsoleteMethods;
 use strict;
 use warnings;
-use parent qw(MyBase::Root);
+use parent qw(Bundle::Bio::Root::Root);
 use String::Random;
 use B qw( svref_2object );
 use File::Path qw(make_path remove_tree);
@@ -194,10 +194,9 @@ You can also look for information at:
 
     The Artistic License 2.0 (GPL Compatible)
 
+=cut
 
-    =cut
+1;
 
 
 
-
-    1;

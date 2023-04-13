@@ -3,11 +3,10 @@ use strict;
 use MCE::Hobo;
 use MCE::Shared;
 use warnings;
-use base qw(MyBase::Bio::Root::Root);
+use base qw(Bundle::Bio::Root::Root);
 use base qw(Bundle::Methods);
 use Data::Dumper;
 use IPC::Run;
-use MyBase::Mysub;
 
 sub new {
     my $class = shift;

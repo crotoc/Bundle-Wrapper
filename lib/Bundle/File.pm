@@ -1,10 +1,9 @@
 package Bundle::File;
 use strict;
 use warnings;
-use parent qw(MyBase::Bio::Root::Root);
+use parent qw(Bundle::Bio::Root::Root);
 use Data::Dumper;
 use parent qw(Bundle::Methods);
-use parent qw(MyBase::Mysub);
 
 sub new {
     my ($class,$file,$del) = @_;
