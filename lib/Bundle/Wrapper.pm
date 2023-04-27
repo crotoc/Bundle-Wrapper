@@ -7,6 +7,7 @@ use parent qw(Bundle::Test);
 use parent qw(Bundle::Multifork);
 use parent qw(Bundle::MCEMap);
 use parent qw(Bundle::File);
+use parent qw(Bundle::ObsoleteMethods);
 
 =head1 NAME
 

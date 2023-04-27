@@ -138,6 +138,20 @@ sub scale2array
 
 
 
+=item B<test_file_exist>;
+test whether file exist
+=cut
+
+sub test_file_exist{
+    my $self = shift;
+    my @file = @_;
+    my $flag;
+    foreach (@file){
+	if (-e $_){ print "TEST: $_ existed\n"; $flag=1;}
+	else {print "TEST: $_ not existed\n";return 0;}
+    }
+    return $flag;
+}
 
 
 
@@ -194,9 +208,9 @@ You can also look for information at:
 
     The Artistic License 2.0 (GPL Compatible)
 
-=cut
+    =cut
 
-1;
+    1;
 
 
 
