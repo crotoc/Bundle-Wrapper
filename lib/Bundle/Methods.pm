@@ -148,6 +148,7 @@ sub clean_err_output{
 sub step_print{
     my ($self,$str)= @_;
     print STDERR "\nSTEP: $str\n";
+    $self->{_step} = $str;
 }
 
 sub system_bash {
@@ -190,20 +191,36 @@ sub log_last{
 
 sub log_fh{
     my($self)=@_;
-    #print Dumper($self->opt);
     $self->throw("Must include \$opt{time}=Bundle::Wrapper->date in script;"), if !${$self->opt}{time};
     
     my $string_gen = String::Random->new;
     ${$self->opt}{dir_log_cmd}=${$self->opt}{dir_log}."/${$self->opt}{time}"."-". $string_gen->randpattern("CCCCCCCC"), if !${$self->opt}{dir_log_cmd};
     $self->system_bash("mkdir -p ${$self->opt}{dir_log_cmd}");
-    my @caller=caller(2);
-    my $fh;
-    $caller[2]=~s/.*://g;
+    my $i = 0;
+    
+    my @caller;
+    while ( (my @call_details = (caller($i++))) ){
+	## print STDERR $call_details[1].":".$call_details[2]." in function ".$call_details[3]."\n";
+	@caller = @call_details;
+    }
 
-    ## print Dumper ${$self->opt}{dir_log_cmd}."/".$caller[3].".cmd";
-    open $fh->{cmd},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".cmd" or die "Can't open \$fh->{cmd}";
-    open $fh->{out},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".out";
-    open $fh->{err},">>",${$self->opt}{dir_log_cmd}."/".$caller[2].".err";
+    my $fh;
+    my $step = $caller[3];
+    if($step=~/^main/){
+	$step=~s/.*:://g;
+    }else{
+	if($self->{_step}){
+	    $step = $self->{_step};
+	    $step =~s/ /_/g;
+	}else{
+	    $step=~s/.*:://g;
+	}
+    }
+
+    ## print Dumper ${$self->opt}{dir_log_cmd}."/".$step.".cmd";
+    open $fh->{cmd},">>",${$self->opt}{dir_log_cmd}."/".$step.".".$self->date.".cmd" or die "Can't open \$fh->{cmd}";
+    open $fh->{out},">>",${$self->opt}{dir_log_cmd}."/".$step.".".$self->date.".out";
+    open $fh->{err},">>",${$self->opt}{dir_log_cmd}."/".$step.".".$self->date.".err";
     return ($fh);
 }
 
