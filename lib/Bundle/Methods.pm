@@ -391,7 +391,6 @@ sub sendmail()
 sub getStrByKeysHash
 {
     my ($self,$keys) = @_;
-    print Dumper $keys;
     my @str;
     map {exists $self->{"$_"}?push @str,$self->{"$_"}:push @str,"";}  @$keys;
     return join ";",@str;
