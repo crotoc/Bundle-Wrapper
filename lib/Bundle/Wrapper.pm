@@ -15,17 +15,18 @@ Bundle::Wrapper - The great new Bundle::Wrapper!
 
 =head1 VERSION
 
-Version 0.03
+Version 0.04
 
 Update: 
 
 1. Absorb Bundle::Mysub
 2. Add Bio dependence
+3. Allow suppressing logs
 
 
 =cut
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 
 =head1 SYNOPSIS

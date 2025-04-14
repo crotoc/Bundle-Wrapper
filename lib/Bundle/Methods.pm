@@ -167,15 +167,15 @@ sub system_bash {
 
 sub run{
     my($self,$cmd)=@_;
-    my $fh_log=$self->log_fh();
-    print {$fh_log->{cmd}} $cmd."\n";
+    my $fh_log=$self->log_fh(),if ${$self->opt}{log};
+    print {$fh_log->{cmd}} $cmd."\n",if ${$self->opt}{log};;
 
     $self->isrun? my $out=$self->cmd_go($cmd):print STDERR "SKIP: $cmd\n";
 
     #print Dumper $self;
     if($out){
-	print {$fh_log->{out}} "CMD:$out->{cmd}\nOUT:$out->{stdout}\n";
-	print {$fh_log->{err}} "CMD:$out->{cmd}\nERR:$out->{stderr}\n";        
+	print {$fh_log->{out}} "CMD:$out->{cmd}\nOUT:$out->{stdout}\n",if ${$self->opt}{log};
+	print {$fh_log->{err}} "CMD:$out->{cmd}\nERR:$out->{stderr}\n",if ${$self->opt}{log};        
     }
     $out
 
