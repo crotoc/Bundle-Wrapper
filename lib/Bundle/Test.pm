@@ -39,24 +39,32 @@ sub input{
     my @file = @_;
     my $n;
     my $i;
+    my @f;
     foreach my $file(@file){
+	if(ref($file) eq 'ARRAY'){
+	    push @f,@$file
+	}else{
+	    push @f,$file
+	}
+    }
+    foreach my $file(@f){
 	$i++;
 	if (-e($file)){
 	    if($i<=5)
-	    {print STDERR "TEST: input $file ---> OK\n";}
+	    {print STDERR "TEST: input OK ---> $file\n";}
 	    $n++;
 	    $self->{_input}->{$file}=1;
 	}
 	else {
 	    if($i<=5){
-		print STDERR "TEST: input $file ---> NOT OK\n";
+		print STDERR "TEST: input NOT OK ---> $file\n";
 	    }
 	    $self->{_input}->{$file}=0;$self->throw("file $file absent\n")
 	}
     }
 
-    if(@file>5){
-	print STDERR "TEST: input many! $n/".scalar(@file)." ---> OK\n";
+    if(@f>5){
+	print STDERR "TEST: input many! $n/".scalar(@f)." ---> OK\n";
     }
 
 }
@@ -67,23 +75,31 @@ sub output{
     my $n=0;
     my $i;
     #print Dumper(@file);
-    foreach (@file){
+    foreach my $file(@file){
+	if(ref($file) eq 'ARRAY'){
+	    push @f,@$file
+	}else{
+	    push @f,$file
+	}
+    }
+
+    foreach (@f){
 	$i++;
 	if (-e $_){
 	    if($i<=5)
-	    {print STDERR "TEST: output $_ ---> OK\n";}
+	    {print STDERR "TEST: output OK ---> $_ \n";}
 	    $n++;
 	    $self->{_output}->{$_}=1;
 	}
 	else {
 	    if($i<=5){
-		print STDERR "TEST: output $_ ---> NOT OK\n";
+		print STDERR "TEST: output NOT OK --> $_ \n";
 	    }
 	    $self->{_output}->{$_}=0;}
     }
     #print Dumper $self->{_output};
-    if(@file>5){
-	print STDERR "TEST: output many! $n/".scalar(@file)." ---> OK\n";
+    if(@f>5){
+	print STDERR "TEST: output many! $n/".scalar(@f)." ---> OK\n";
     }
     
     my $flag=1;
