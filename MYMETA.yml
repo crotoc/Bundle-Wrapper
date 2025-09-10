@@ -7,7 +7,7 @@ build_requires:
 configure_requires:
   Module::Build: '0.4004'
 dynamic_config: 0
-generated_by: 'Module::Build version 0.4234, CPAN::Meta::Converter version 2.150010'
+generated_by: 'Module::Build version 0.4231, CPAN::Meta::Converter version 2.150010'
 license: artistic_2
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -51,7 +51,7 @@ provides:
     file: lib/Bundle/Test.pm
   Bundle::Wrapper:
     file: lib/Bundle/Wrapper.pm
-    version: '0.03'
+    version: '0.04'
 requires:
   Data::Dumper: '0'
   File::Path: '0'
@@ -63,5 +63,5 @@ requires:
   String::Random: '0'
 resources:
   license: http://www.perlfoundation.org/artistic_license_2_0
-version: '0.03'
+version: '0.04'
 x_serialization_backend: 'CPAN::Meta::YAML version 0.018'

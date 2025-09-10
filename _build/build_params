@@ -5,12 +5,15 @@ do{ my $x = [
        {},
        {
          'PL_files' => undef,
-         '_added_to_INC' => [],
+         '_added_to_INC' => [
+                              '/home/chenr6/module/',
+                              '/home/chenr6/perl5/lib/perl5/'
+                            ],
          'allow_mb_mismatch' => 0,
          'allow_pureperl' => 0,
          'auto_configure_requires' => 1,
          'autosplit' => undef,
-         'base_dir' => '/fs0/chenr6/chenr6/myscript/perlmodule/Bundle-Wrapper',
+         'base_dir' => '/home/chenr6/myscript/perlmodule/Bundle-Wrapper',
          'bindoc_dirs' => [
                             'blib/script'
                           ],
@@ -52,7 +55,7 @@ do{ my $x = [
                           ],
          'dist_name' => 'Bundle-Wrapper',
          'dist_suffix' => undef,
-         'dist_version' => '0.04',
+         'dist_version' => '0.05',
          'dist_version_from' => 'lib/Bundle/Wrapper.pm',
          'dynamic_config' => 1,
          'extra_compiler_flags' => [],
@@ -73,7 +76,7 @@ do{ my $x = [
                           ],
          'license' => 'artistic_2',
          'magic_number' => undef,
-         'mb_version' => '0.4234',
+         'mb_version' => '0.4231',
          'meta_add' => {},
          'meta_merge' => {},
          'metafile' => 'META.yml',
@@ -82,9 +85,9 @@ do{ my $x = [
          'mymetafile' => 'MYMETA.yml',
          'mymetafile2' => 'MYMETA.json',
          'needs_compiler' => '',
-         'orig_dir' => '/fs0/chenr6/chenr6/myscript/perlmodule/Bundle-Wrapper',
+         'orig_dir' => '/home/chenr6/myscript/perlmodule/Bundle-Wrapper',
          'original_prefix' => {},
-         'perl' => '/fs0/chenr6/chenr6/opt/condaEnv/AccreLibEnv_latest/bin/perl',
+         'perl' => '/usr/bin/perl',
          'pm_files' => undef,
          'pod_files' => undef,
          'pollute' => undef,

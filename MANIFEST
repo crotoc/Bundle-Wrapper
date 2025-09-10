@@ -22,7 +22,6 @@ lib/Bundle/Bio/Version.pm
 lib/Bundle/File.pm
 lib/Bundle/MCEMap.pm
 lib/Bundle/Methods.pm
-lib/Bundle/Multifork.pm
 lib/Bundle/ObsoleteMethods.pm
 lib/Bundle/Test.pm
 lib/Bundle/Wrapper.pm

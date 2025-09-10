@@ -4,6 +4,7 @@ do{ my $x = {
        'Bundle-Wrapper-0.02' => 1,
        'Bundle-Wrapper-0.03' => 1,
        'Bundle-Wrapper-0.04' => 1,
+       'Bundle-Wrapper-0.05' => 1,
        'blib' => 1
      };
 $x; }

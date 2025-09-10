@@ -4,7 +4,7 @@
       "Rui Chen <crotoc@gmail.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4234",
+   "generated_by" : "Module::Build version 0.4231",
    "license" : [
       "artistic_2"
    ],
@@ -79,9 +79,6 @@
       "Bundle::Methods" : {
          "file" : "lib/Bundle/Methods.pm"
       },
-      "Bundle::Multifork" : {
-         "file" : "lib/Bundle/Multifork.pm"
-      },
       "Bundle::ObsoleteMethods" : {
          "file" : "lib/Bundle/ObsoleteMethods.pm",
          "version" : "0.01"
@@ -91,7 +88,7 @@
       },
       "Bundle::Wrapper" : {
          "file" : "lib/Bundle/Wrapper.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       }
    },
    "release_status" : "stable",
@@ -100,6 +97,6 @@
          "http://www.perlfoundation.org/artistic_license_2_0"
       ]
    },
-   "version" : "0.04",
-   "x_serialization_backend" : "JSON::PP version 4.04"
+   "version" : "0.05",
+   "x_serialization_backend" : "JSON::PP version 4.02"
 }

@@ -19,14 +19,14 @@ Version 0.04
 
 Update: 
 
-1. Absorb Bundle::Mysub
-2. Add Bio dependence
-3. Allow suppressing logs
+1. remove MCE::Hobo
+2. remove MCE::Shared
+3. remove multfork.pm
 
 
 =cut
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 
 =head1 SYNOPSIS

@@ -1,4 +1,4 @@
-#! /fs0/chenr6/chenr6/opt/condaEnv/AccreLibEnv_latest/bin/perl
+#! /usr/bin/perl
 
 use strict;
 use Cwd;
@@ -11,7 +11,7 @@ sub magic_number_matches {
   open $FH, '<','_build/magicnum' or return 0;
   my $filenum = <$FH>;
   close $FH;
-  return $filenum == 533602;
+  return $filenum == 50920;
 }
 
 my $progname;
@@ -20,7 +20,7 @@ BEGIN {
   $^W = 1;  # Use warnings
   $progname = basename($0);
   $orig_dir = Cwd::cwd();
-  my $base_dir = '/fs0/chenr6/chenr6/myscript/perlmodule/Bundle-Wrapper';
+  my $base_dir = '/home/chenr6/myscript/perlmodule/Bundle-Wrapper';
   if (!magic_number_matches()) {
     unless (chdir($base_dir)) {
       die ("Couldn't chdir($base_dir), aborting\n");
@@ -31,11 +31,9 @@ BEGIN {
   }
   unshift @INC,
     (
-
+     '/home/chenr6/module',
+     '/home/chenr6/perl5/lib/perl5'
     );
-    if ($INC[-1] ne '.') {
-        push @INC, '.';
-    }
 
 }
 
