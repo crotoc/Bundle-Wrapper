@@ -74,6 +74,7 @@ sub output{
     my @file = @_;
     my $n=0;
     my $i;
+    my @f;
     #print Dumper(@file);
     foreach my $file(@file){
 	if(ref($file) eq 'ARRAY'){

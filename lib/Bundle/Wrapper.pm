@@ -4,7 +4,6 @@ use warnings;
 use parent qw(Bundle::Bio::Root::Root);
 use Data::Dumper;
 use parent qw(Bundle::Test);
-use parent qw(Bundle::Multifork);
 use parent qw(Bundle::MCEMap);
 use parent qw(Bundle::File);
 use parent qw(Bundle::ObsoleteMethods);

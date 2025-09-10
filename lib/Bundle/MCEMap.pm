@@ -4,7 +4,6 @@ use warnings;
 use parent qw(Bundle::Bio::Root::Root);
 use parent qw(Bundle::Methods);
 use Data::Dumper;
-use MCE::Shared;
 use MCE::Map;
 
 sub new {
