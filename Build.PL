@@ -21,9 +21,7 @@ my $builder = Module::Build->new(
             'File::Path' => '0',
             'IPC::Cmd' => '0',
             'IPC::Run' => '0',
-            'MCE::Hobo' => '0',
 	    'MCE::Map' => '0',
-	    'MCE::Shared' => '0',
 	    'String::Random' => '0'
 	    
     },

@@ -25,9 +25,7 @@
             "File::Path" : "0",
             "IPC::Cmd" : "0",
             "IPC::Run" : "0",
-            "MCE::Hobo" : "0",
             "MCE::Map" : "0",
-            "MCE::Shared" : "0",
             "String::Random" : "0"
          }
       },
@@ -37,69 +35,12 @@
          }
       }
    },
-   "provides" : {
-      "Bundle::Bio::Root::Build" : {
-         "file" : "lib/Bundle/Bio/Root/Build.pm",
-         "version" : "1.006923"
-      },
-      "Bundle::Bio::Root::Exception" : {
-         "file" : "lib/Bundle/Bio/Root/Exception.pm"
-      },
-      "Bundle::Bio::Root::HTTPget" : {
-         "file" : "lib/Bundle/Bio/Root/HTTPget.pm"
-      },
-      "Bundle::Bio::Root::IO" : {
-         "file" : "lib/Bundle/Bio/Root/IO.pm"
-      },
-      "Bundle::Bio::Root::Root" : {
-         "file" : "lib/Bundle/Bio/Root/Root.pm"
-      },
-      "Bundle::Bio::Root::RootI" : {
-         "file" : "lib/Bundle/Bio/Root/RootI.pm"
-      },
-      "Bundle::Bio::Root::Storable" : {
-         "file" : "lib/Bundle/Bio/Root/Storable.pm"
-      },
-      "Bundle::Bio::Root::Test" : {
-         "file" : "lib/Bundle/Bio/Root/Test.pm"
-      },
-      "Bundle::Bio::Root::Utilities" : {
-         "file" : "lib/Bundle/Bio/Root/Utilities.pm"
-      },
-      "Bundle::Bio::Root::Version" : {
-         "file" : "lib/Bundle/Bio/Root/Version.pm",
-         "version" : "1.006923"
-      },
-      "Bundle::File" : {
-         "file" : "lib/Bundle/File.pm"
-      },
-      "Bundle::MCEMap" : {
-         "file" : "lib/Bundle/MCEMap.pm"
-      },
-      "Bundle::Methods" : {
-         "file" : "lib/Bundle/Methods.pm"
-      },
-      "Bundle::Multifork" : {
-         "file" : "lib/Bundle/Multifork.pm"
-      },
-      "Bundle::ObsoleteMethods" : {
-         "file" : "lib/Bundle/ObsoleteMethods.pm",
-         "version" : "0.01"
-      },
-      "Bundle::Test" : {
-         "file" : "lib/Bundle/Test.pm"
-      },
-      "Bundle::Wrapper" : {
-         "file" : "lib/Bundle/Wrapper.pm",
-         "version" : "0.04"
-      }
-   },
    "release_status" : "stable",
    "resources" : {
       "license" : [
          "http://www.perlfoundation.org/artistic_license_2_0"
       ]
    },
-   "version" : "0.04",
+   "version" : "0.05",
    "x_serialization_backend" : "JSON::PP version 4.02"
 }
